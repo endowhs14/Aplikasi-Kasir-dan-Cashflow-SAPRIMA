@@ -1,0 +1,17 @@
+# Toolchains stay outside this repository.
+**/.dart_tool/
+**/build/
+**/.gradle/
+**/local.properties
+**/.flutter-plugins*
+**/*.iml
+.idea/
+.env
+.env.*
+*.jks
+*.keystore
+*.apk
+*.aab
+*.db
+*.db-*
+*.log
