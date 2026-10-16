@@ -49,3 +49,14 @@ Jika build gagal, baca pesan Gradle sebelum mengulang. Jangan hapus cache/progre
 - Penyebab build pertama: Java bawaan hanya JRE. JDK Temurin 21.0.12.1+1 diunduh dari release resmi, SHA-256 diverifikasi.
 - SDK 35 tambahan dipasang untuk plugin JNI. JDK baru menggunakan trust store sistem `/etc/ssl/certs/java/cacerts`; verifikasi TLS tetap aktif.
 - Build ulang sedang berjalan. Skrip reproducible ada di `scripts/cloud-setup.sh` dan `scripts/build-apk.sh`.
+
+## APK berhasil — 16 Oktober 2026
+- `flutter build apk --debug` berhasil setelah JDK, SDK 35, CMake 3.22.1 dan trust store disiapkan. Tidak ada verifikasi TLS/checksum yang dimatikan.
+- APK: `/workspace/deliverables/saprima-kasir-0.1.0-debug.apk`.
+- SHA-256: `15b009a2586e5eed6dccbd6923170b3d9aa1fa81c088495fdb9da0831d24ea66`.
+- Ukuran: 177.542.491 byte; appId `id.saprima.saprima_kasir`; versi `0.1.0`, code `1`; minSdk 24, target 36; ARMv7/ARM64/x86_64.
+- `apksigner verify --verbose`: valid, signature v2. `aapt dump badging`: identitas sesuai. ZIP integrity lulus; libsqlcipher.so tersedia pada ketiga ABI.
+- Bukti tes: 12 database + 5 uang/domain lulus, 3 widget lulus setelah perbaikan, analyzer bersih, crash fixture 7 fase lulus. Log lokal di `/workspace/deliverables`.
+- `bash scripts/cloud-setup.sh` dijalankan ulang berhasil; lockfile tidak berubah.
+- `install_script` dan `start_skill` tersimpan di draft environment. Simpan/review pengaturan lalu publish environment untuk snapshot tugas berikutnya; belum mengklaim validasi restore tugas baru.
+- Emulator software Android 35 tersedia, proses boot/install sedang diperiksa. Belum ada klaim uji HP nyata.
