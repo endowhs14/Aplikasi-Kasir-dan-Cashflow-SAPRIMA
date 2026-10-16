@@ -518,7 +518,7 @@ Relasi penting:
 - Satu tenant dapat memiliki banyak cabang.
 - Satu tenant memiliki banyak membership pengguna.
 - Satu cabang memiliki banyak transaksi.
-- Satu transaksi memiliki satu atau beberapa item.
+- Setiap transaksi memiliki satu atau beberapa item.
 - Stok terikat pada produk dan cabang.
 - Satu tenant mempunyai hak langganan dan riwayat billing.
 
