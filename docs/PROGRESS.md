@@ -41,3 +41,11 @@ python3 tool/check_crash.py
 flutter build apk --debug
 ```
 Jika build gagal, baca pesan Gradle sebelum mengulang. Jangan hapus cache/progres. APK final harus diverifikasi, disalin ke `/workspace/deliverables`, lalu catat SHA-256/ukuran/version.
+
+## Checkpoint build — 16 Oktober 2026
+- Push source commit `c0078cf2ddb2f23438c35207d70f3c675ffbdaf5` ke main terverifikasi lewat `git ls-remote`.
+- Tes UI kini 3/3 lulus. Perbaikan: tunggu scroll selesai, tekan BackButton langsung (helper pageBack tidak cocok label Indonesia).
+- `flutter analyze` kembali bersih setelah perubahan.
+- Penyebab build pertama: Java bawaan hanya JRE. JDK Temurin 21.0.12.1+1 diunduh dari release resmi, SHA-256 diverifikasi.
+- SDK 35 tambahan dipasang untuk plugin JNI. JDK baru menggunakan trust store sistem `/etc/ssl/certs/java/cacerts`; verifikasi TLS tetap aktif.
+- Build ulang sedang berjalan. Skrip reproducible ada di `scripts/cloud-setup.sh` dan `scripts/build-apk.sh`.

@@ -55,7 +55,7 @@ void main() {
     expect(demo.summary()['total'], 16000);
     expect(shop.summary()['total'], 0);
     expect(t.takeException(), isNull);
-    await t.pageBack();
+    await t.tap(find.byType(BackButton));
     await t.pumpAndSettle();
     await t.tap(find.text('Riwayat'));
     await t.pumpAndSettle();
