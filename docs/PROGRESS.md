@@ -60,3 +60,9 @@ Jika build gagal, baca pesan Gradle sebelum mengulang. Jangan hapus cache/progre
 - `bash scripts/cloud-setup.sh` dijalankan ulang berhasil; lockfile tidak berubah.
 - `install_script` dan `start_skill` tersimpan di draft environment. Simpan/review pengaturan lalu publish environment untuk snapshot tugas berikutnya; belum mengklaim validasi restore tugas baru.
 - Emulator software Android 35 tersedia, proses boot/install sedang diperiksa. Belum ada klaim uji HP nyata.
+
+## Distribusi APK
+- APK lokal sudah valid; upload ke draft GitHub Release gagal HTTP 401 pada uploads.github.com meskipun API/Git repo berfungsi. Tidak meminta/mengambil token mentah.
+- Disiapkan workflow manual `.github/workflows/android-apk.yml` untuk build dan unggah dengan GITHUB_TOKEN bawaan runner; hanya runner standar repository publik, tidak membeli layanan.
+- Draft release `v0.1.0-alpha.1` sudah dibuat tetapi belum dipublikasikan dan saat checkpoint ini belum memiliki asset.
+- Keystore debug runner berbeda dari cloud lokal: checksum APK CI akan berbeda; metadata final harus diambil dari artifact yang benar-benar dibagikan.
