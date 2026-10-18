@@ -66,3 +66,9 @@ Jika build gagal, baca pesan Gradle sebelum mengulang. Jangan hapus cache/progre
 - Disiapkan workflow manual `.github/workflows/android-apk.yml` untuk build dan unggah dengan GITHUB_TOKEN bawaan runner; hanya runner standar repository publik, tidak membeli layanan.
 - Draft release `v0.1.0-alpha.1` sudah dibuat tetapi belum dipublikasikan dan saat checkpoint ini belum memiliki asset.
 - Keystore debug runner berbeda dari cloud lokal: checksum APK CI akan berbeda; metadata final harus diambil dari artifact yang benar-benar dibagikan.
+
+## Kelanjutan distribusi — 18 Oktober 2026
+- Main `d32075a` sudah tersimpan di GitHub. APK lokal asli tetap dipertahankan.
+- Instal APK lokal melalui `adb install --no-streaming` berhasil pada emulator Android 35. Boot selesai dan `am start -W` menghasilkan Status ok; ini belum bukti seluruh alur UI native atau HP fisik.
+- Run Actions `38862859350` gagal karena default setup-android mencoba paket SDK lama `tools` yang sudah tidak tersedia. Log arsip mengonfirmasi `Failed to find package 'tools'`; konfigurasi diperbaiki menjadi `packages: platform-tools`.
+- Berikutnya: jalankan workflow yang diperbaiki, periksa tes/build/signature, unduh artifact, cocokkan SHA-256, unggah/publikasikan prerelease dan catat URL unduhan aktual. Jangan mengganti checksum lokal dengan checksum CI tanpa label.

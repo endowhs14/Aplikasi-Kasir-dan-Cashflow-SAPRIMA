@@ -24,6 +24,7 @@ jobs:
         with:
           cmdline-tools-version: '13114758'
           log-accepted-android-sdk-licenses: false
+          packages: platform-tools
       - name: Android dependencies
         run: sdkmanager 'platforms;android-35' 'platforms;android-36' 'build-tools;36.0.0' 'ndk;28.2.13676358' 'cmake;3.22.1'
       - name: Locked dependencies and validation
