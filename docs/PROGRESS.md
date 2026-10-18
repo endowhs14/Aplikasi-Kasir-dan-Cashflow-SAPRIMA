@@ -1,5 +1,13 @@
 # Checkpoint implementasi
 
+## Status terkini — 18 Oktober 2026
+
+**APK awal sudah dibangun dan tersedia untuk diunduh.** [Rilis v0.1.0-alpha.1](https://github.com/endowhs14/Aplikasi-Kasir-dan-Cashflow-SAPRIMA/releases/tag/v0.1.0-alpha.1) memuat APK, checksum dan metadata. [Catatan rilis](RELEASE-0.1.0.md) merupakan acuan hasil akhir. Main berisi implementasi Flutter, lima dokumen sumber, pengujian dan skrip build. PRD SaaS penuh belum selesai.
+
+Bagian bertanggal di bawah adalah riwayat checkpoint; status gagal/belum tersedia pada bagian lama tidak menggantikan hasil terbaru ini.
+
+## Riwayat awal
+
 15 Oktober 2026 (Asia/Jakarta).
 
 ## Selesai
@@ -79,3 +87,20 @@ Jika build gagal, baca pesan Gradle sebelum mengulang. Jangan hapus cache/progre
 - Pemeriksaan ulang APK lokal: SHA-256 sama, signature v2 valid, metadata cocok. Emulator membuat database toko dan demo, tetapi System UI mengalami ANR dan screenshot hitam; pengujian alur native belum dinyatakan lulus.
 - Resume distribusi: `gh run view 39094136184`; bila sukses `gh run download 39094136184 -n saprima-android-debug -D /workspace/deliverables/ci-39094136184`. Verifikasi file yang diunduh dan perbarui catatan release sebelum mempublikasikan draft `v0.1.0-alpha.1`. APK CI mempunyai key/checksum sendiri; pertahankan APK lokal asli.
 - Workflow berikutnya menjaga asset release yang sudah dipublikasikan; hasil build ulang tetap tersedia melalui artifact Actions.
+
+## Penyerahan APK — 18 Oktober 2026
+
+- Actions [39094136184](https://github.com/endowhs14/Aplikasi-Kasir-dan-Cashflow-SAPRIMA/actions/runs/39094136184) **success/completed**. Log mengonfirmasi analyzer bersih, 20 tes lulus, fixture crash/reopen/replay 7 fase lulus, build dan upload berhasil.
+- APK distribusi: [saprima-kasir-0.1.0-debug.apk](https://github.com/endowhs14/Aplikasi-Kasir-dan-Cashflow-SAPRIMA/releases/download/v0.1.0-alpha.1/saprima-kasir-0.1.0-debug.apk), 177.543.947 byte. SHA-256 `da6e1c7565c7237061503c3d7e8d57ee3f9b4fd15bb0d0911be9ed16c623c5d6`.
+- Application ID `id.saprima.saprima_kasir`; version 0.1.0 (1); minSdk 24, target 36, ARMv7/ARM64/x86_64. Signature v2, manifest, ZIP integrity dan tiga library SQLCipher diverifikasi dari file unduhan.
+- Prerelease sudah dipublikasikan (isDraft=false). Repository PUBLIC. Tag `v0.1.0-alpha.1` menunjuk source build `00234aebc8e193b1aa5a4ae3f0634558255a2747`; tag diverifikasi lewat git ls-remote. Perubahan setelah source build hanya workflow/catatan dokumentasi.
+- Tautan release publik diunduh ulang memakai curl; hash cocok. Salinan CI ada di `/workspace/deliverables/release-0.1.0/`; APK lokal asli tetap di `/workspace/deliverables/saprima-kasir-0.1.0-debug.apk`, dengan hash lama yang berbeda.
+- Download langsung artifact Actions dari cloud ditolak pada host blob penyimpanan; download asset GitHub Release berhasil. Ini tidak menghalangi distribusi APK publik.
+- Smoke emulator **APK lokal**: install Success, launch Status ok, database dibuat, hierarchy UI Android menampilkan katalog demo dan keranjang satu Air mineral Rp5.000 setelah tap. Android System UI ANR/screenshot hitam menghalangi validasi visual/checkout lengkap; tidak ada klaim UAT lengkap atau HP fisik. APK CI tidak dipasang terpisah karena signing key berbeda; data emulator lama dipertahankan.
+- Reusable `install_script` dan `start_skill` tersimpan pada draft environment. Domain log GitHub `productionresultssa0.blob.core.windows.net` ditambahkan tanpa menghapus domain sebelumnya. Draft tersimpan bukan bukti publish/restore environment baru.
+
+### Resume setelah penyerahan
+
+Tidak perlu membangun ulang APK yang sudah valid. Baca README dan RELEASE-0.1.0.md; unduh asset yang sudah tersedia untuk mencoba. Untuk perubahan berikutnya, gunakan checkout ini dan `source scripts/cloud-env.sh`; cek git status sebelum mengedit. Validasi sesuai perubahan dengan `flutter analyze`, `flutter test --reporter expanded`, `python3 tool/check_crash.py` dari apps/mobile. Build lokal melalui `bash scripts/build-apk.sh` dari root. Workflow manual `gh workflow run android-apk.yml --ref main` menghasilkan artifact baru tanpa menimpa release yang sudah dipublikasikan. Signing/versioning rilis berikutnya harus direncanakan agar pembaruan tidak menghilangkan data.
+
+Pekerjaan berikut: uji instal dan alur nyata pada HP Android, validasi visual/performa, backup/restore, kemudian tahapan PRD (auth/RBAC, backend/sync dan billing). Bukan blocker penyerahan APK awal ini.

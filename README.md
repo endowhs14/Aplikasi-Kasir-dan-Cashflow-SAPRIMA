@@ -2,6 +2,10 @@
 
 Aplikasi kasir **Flutter Android** untuk milestone APK lokal 0.1.0. Nama SAPRIMA masih nama kerja. Ini belum seluruh MVP SaaS pada PRD dan belum untuk operasional produksi.
 
+## Unduh APK awal
+
+[Unduh SAPRIMA Kasir 0.1.0 debug](https://github.com/endowhs14/Aplikasi-Kasir-dan-Cashflow-SAPRIMA/releases/download/v0.1.0-alpha.1/saprima-kasir-0.1.0-debug.apk) — Android 7+, 169,32 MiB. [Catatan rilis, checksum dan hasil pengujian](docs/RELEASE-0.1.0.md).
+
 ## Fitur APK awal
 
 Katalog barang/jasa, SKU dan kategori; tambah/edit produk; pencarian; keranjang dengan kuantitas pecahan; diskon nominal; pembayaran tunai dan kembalian; nota yang dapat disalin; histori; stok awal/penyesuaian/ledger; ringkasan penjualan. Draft dan transaksi bertahan saat aplikasi dibuka ulang.
