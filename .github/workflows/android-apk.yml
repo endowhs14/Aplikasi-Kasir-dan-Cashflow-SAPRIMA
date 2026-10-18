@@ -58,4 +58,9 @@ jobs:
       - name: Attach files to the prepared prerelease draft
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload v0.1.0-alpha.1 artifacts/* --clobber
+        run: |
+          if [ "$(gh release view v0.1.0-alpha.1 --json isDraft --jq .isDraft)" = true ]; then
+            gh release upload v0.1.0-alpha.1 artifacts/* --clobber
+          else
+            echo 'Published release preserved. Download this build from the workflow artifact.'
+          fi

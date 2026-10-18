@@ -72,3 +72,10 @@ Jika build gagal, baca pesan Gradle sebelum mengulang. Jangan hapus cache/progre
 - Instal APK lokal melalui `adb install --no-streaming` berhasil pada emulator Android 35. Boot selesai dan `am start -W` menghasilkan Status ok; ini belum bukti seluruh alur UI native atau HP fisik.
 - Run Actions `38862859350` gagal karena default setup-android mencoba paket SDK lama `tools` yang sudah tidak tersedia. Log arsip mengonfirmasi `Failed to find package 'tools'`; konfigurasi diperbaiki menjadi `packages: platform-tools`.
 - Berikutnya: jalankan workflow yang diperbaiki, periksa tes/build/signature, unduh artifact, cocokkan SHA-256, unggah/publikasikan prerelease dan catat URL unduhan aktual. Jangan mengganti checksum lokal dengan checksum CI tanpa label.
+
+### Run distribusi 39094136184
+- Source build: `00234aebc8e193b1aa5a4ae3f0634558255a2747`, push main terverifikasi.
+- Perbaikan paket SDK berhasil. Tahap locked dependencies/format/analyze/test/crash fixture lulus di GitHub Actions; kompilasi APK sedang berlangsung pada checkpoint ini.
+- Pemeriksaan ulang APK lokal: SHA-256 sama, signature v2 valid, metadata cocok. Emulator membuat database toko dan demo, tetapi System UI mengalami ANR dan screenshot hitam; pengujian alur native belum dinyatakan lulus.
+- Resume distribusi: `gh run view 39094136184`; bila sukses `gh run download 39094136184 -n saprima-android-debug -D /workspace/deliverables/ci-39094136184`. Verifikasi file yang diunduh dan perbarui catatan release sebelum mempublikasikan draft `v0.1.0-alpha.1`. APK CI mempunyai key/checksum sendiri; pertahankan APK lokal asli.
+- Workflow berikutnya menjaga asset release yang sudah dipublikasikan; hasil build ulang tetap tersedia melalui artifact Actions.
